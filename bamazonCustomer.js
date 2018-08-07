@@ -49,7 +49,7 @@ function afterConnection() {
                     var proQuantity = purchaseOrder.quantityItem;
                     var total = proPrice * proQuantity;
                     console.log("Product: " + res[i].product_name + " Quantity: " + proQuantity + " at $" + res[i].price);
-                    console.log("Comes to a total of: $" + total);
+                    console.log("Comes to a total of: $" + total.toFixed(2));
 
                     var updateStock = (res[i].stock_quantity - purchaseOrder.idItem);
                     var userId2 = (purchaseOrder.idItem);
