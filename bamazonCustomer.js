@@ -53,10 +53,33 @@ function afterConnection() {
 
                     var updateStock = (res[i].stock_quantity - purchaseOrder.idItem);
                     var userId2 = (purchaseOrder.idItem);
+                    payment(updateStock, userId2);
                 }
             }
         })
       });
+      function payment(updateStock, userId2) {
+          inquirer
+          .prompt([{
+              type: "confirm",
+              name: "confirmPayment",
+              message: "Will you be paying cash?",
+              default: true
+          }]).then(function(userAccepts) {
+              if (userAccepts.confirmPayment === true) {
+                  connection.query("UPDATE products SET ? WHERE ?", [{
+                      stock_quantity: updateStock 
+                  }, {
+                      id: userId2
+                  }], function(err, res) {});
+                  console.log("Thank you for you're purchase. Store quantity has been updated")
+                  afterConnection();
+              } else {
+                  console.log("Sorry, but our credit card machines are down. Please come back with cash money")
+                  afterConnection();
+              }
+          })
+      }
   });
 }
 afterConnection();
