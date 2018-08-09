@@ -27,7 +27,7 @@ function afterConnection() {
     for (var i = 0; i < res.length; i++) {
         table.push([res[i].id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity]);
     }
-    // Fancy Table
+    // Fancy Table to display data
     console.log(table.toString());
     inquirer
     .prompt([{
