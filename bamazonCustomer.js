@@ -33,7 +33,7 @@ function afterConnection() {
     .prompt([{
         type: "input",
         name: "idItem",
-        message: "What would you like to buy? Please select item by id number",
+        message: "What would you like to buy? Please select item by id number: ",
     }, {
         type: "input",
         name: "quantityItem",
@@ -44,6 +44,7 @@ function afterConnection() {
             for (var i = 0; i < res.length; i++) {
                 if (purchaseOrder.quantityItem > res[i].stock_quantity) {
                     console.log("Sorry but we do not have that quantity at this time. Please come back tomorrow");
+                    afterConnection();
                 } else {
                     var proPrice = res[i].price;
                     var proQuantity = purchaseOrder.quantityItem;
